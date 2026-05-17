@@ -6,7 +6,6 @@ from __future__ import annotations
 import os
 import pickle
 import re
-from pathlib import Path
 
 import jax
 import jax.numpy as jnp
@@ -96,6 +95,7 @@ def generate_greedy(model, params, tokenizer, prompt: str, num_new_tokens: int) 
 
 def main() -> None:
     os.environ.setdefault("XLA_PYTHON_CLIENT_PREALLOCATE", "false")
+    os.environ.setdefault("XLA_PYTHON_CLIENT_MEM_FRACTION", "0.90")
 
     cfg = ZenyxConfig()
     print("backend:", jax.default_backend())
@@ -110,6 +110,7 @@ def main() -> None:
     model = ZenyxV3Model(cfg)
 
     generated_ids, decoded = generate_greedy(model, params, tokenizer, PROMPT, 2)
+    assert len(generated_ids) >= 2
     token_pieces = [
         tokenizer.decode([token_id], skip_special_tokens=False, clean_up_tokenization_spaces=False)
         for token_id in generated_ids
@@ -137,6 +138,7 @@ import pickle
 import re
 
 os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = "0.85"
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import jax
@@ -226,6 +228,7 @@ def main():
     print("2-token text:", repr(two_text))
     print("10-token ids:", ten_ids)
     print("10-token text:", repr(ten_text))
+    print("2-token check:", len(two_ids) >= 2)
 
 
 if __name__ == "__main__":
