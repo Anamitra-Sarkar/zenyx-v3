@@ -9,12 +9,12 @@
     --force-reinstall""" # I pasted as docstring as I dont want to harm code and also show them as unnecessary comments!
 
 # Cell 3: (Installation required on Kaggle TPU)
-"""!pip install -q \
-    "flax>=0.12.2" \
-    "optax>=0.2.7" \
-    "transformers>=4.47.0" \
-    "datasets>=3.0.0" \
-    "huggingface_hub>=0.26.0""""
+# !pip install -q \
+#     "flax>=0.12.2" \
+#     "optax>=0.2.7" \
+#     "transformers>=4.47.0" \
+#     "datasets>=3.0.0" \
+#     "huggingface_hub>=0.26.0"
 # Same goes for Cell 3 as well, the installation commands were run in Kaggle and hence have been pasted as commands and docstrings only for help! They should be run accordingly in terminal when required >.<!
 
 # Cell 4: (Verification of JAX devices!)
